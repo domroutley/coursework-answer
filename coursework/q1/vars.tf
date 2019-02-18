@@ -9,17 +9,3 @@ variable "auth_url" {
 }
 
 variable "token" {} # This variable needs to be "declared" but is stored as an environment variable
-
-variable "number_of_webservers" {
-  description = "The number of webservers launched"
-  default     = "2"
-}
-
-variable "instance_names" {
-  description = "A list of names to give the dynamically created servers."
-  default = {
-#  Index         Name
-    "0"       = "Green"
-    "1"       = "Blue"
-  }
-}
