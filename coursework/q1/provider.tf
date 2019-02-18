@@ -1,5 +1,6 @@
 provider "openstack" {
-  tenant_id     = "c1534969"
-  auth_url      = "https://cscloud.cf.ac.uk:5000"
-  token         = "" # DO NOT COMMIT THIS YOU FOOL
+
+  tenant_id     = "${var.tenant_id}"
+  auth_url      = "${var.auth_url}"
+  token         = "${var.token}"
 }
