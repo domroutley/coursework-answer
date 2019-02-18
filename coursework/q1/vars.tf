@@ -12,7 +12,7 @@ variable "token" {} # This variable needs to be "declared" but is stored as an e
 
 variable "number_of_webservers" {
   description = "The number of webservers launched"
-  default     = 2
+  default     = "2"
 }
 
 variable "instance_names" {
