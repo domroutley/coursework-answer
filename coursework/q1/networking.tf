@@ -21,23 +21,3 @@ resource "openstack_networking_router_interface_v2" "webservers_router_internal_
   router_id           = "${openstack_networking_router_v2.webservers_router.id}"
   subnet_id           = "${openstack_networking_subnet_v2.webservers_subnet.id}"
 }
-
-# resource "openstack_compute_interface_attach_v2" "prod_instance_interfaces" { # Attach prod webserver to the network
-#   instance_id         = "${openstack_compute_instance_v2.prod.id}"
-#   network_id          = "${openstack_networking_network_v2.webservers_network.id}"
-# }
-#
-# resource "openstack_compute_interface_attach_v2" "dev_instance_interfaces" { # Attach dev webserver to the network
-#   instance_id         = "${openstack_compute_instance_v2.dev.id}"
-#   network_id          = "${openstack_networking_network_v2.webservers_network.id}"
-# }
-
-
-# Get the floating IPs
-data "openstack_networking_floatingip_v2" "prod_webserver_ip" {
-  address = "10.72.96.170"
-}
-
-data "openstack_networking_floatingip_v2" "dev_webserver_ip" {
-  address = "10.72.96.124"
-}
