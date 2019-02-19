@@ -53,6 +53,6 @@ resource "openstack_networking_secgroup_rule_v2" "sec_grp_rule_ssh" {
   protocol          = "tcp"
   port_range_min    = 22
   port_range_max    = 22
-  remote_ip_prefix  = "192.168.0.0/24"
+  remote_ip_prefix  = "${var.subnet_1_CIDR}"
   security_group_id = "${openstack_networking_secgroup_v2.internal_access_sec_group.id}"
 }

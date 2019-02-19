@@ -1,13 +1,13 @@
 resource "openstack_compute_instance_v2" "prod" {
-  image_name      = "Ubuntu Server 18.04.1"         # The name of the image that is to be used
-  flavor_name     = "m1.micro"                      # The flavor of server to use
-  name            = "Production Webserver"          # The unique name for this instance
-  key_pair        = "pheonix"                       # What ssh key pair to use
-  security_groups =                                 # What security group/s are associated with instance
+  image_name      = "Ubuntu Server 18.04.1"           # The name of the image that is to be used
+  flavor_name     = "m1.micro"                        # The flavor of server to use
+  name            = "Production Webserver"            # The unique name for this instance
+  key_pair        = "${var.internal_access_key_name}" # What ssh key pair to use
+  security_groups =                                   # What security group/s are associated with instance
     ["${openstack_networking_secgroup_v2.web_sec_group.name}",
     "${openstack_networking_secgroup_v2.internal_access_sec_group.name}"
   ]
-  network {                                         # Select what network/s to assign instance to
+  network {                                           # Select what network/s to assign instance to
     name = "${openstack_networking_network_v2.network_1.name}"
   }
 }
@@ -16,7 +16,7 @@ resource "openstack_compute_instance_v2" "dev" {
   image_name      = "Ubuntu Server 18.04.1"
   flavor_name     = "m1.micro"
   name            = "Development Webserver"
-  key_pair        = "pheonix"
+  key_pair        = "${var.internal_access_key_name}"
   security_groups = [
     "${openstack_networking_secgroup_v2.web_sec_group.name}",
     "${openstack_networking_secgroup_v2.internal_access_sec_group.name}"
@@ -40,7 +40,7 @@ resource "openstack_compute_instance_v2" "drone_and_management" {
   image_name      = "Ubuntu Server 18.04.1"
   flavor_name     = "m1.tiny"
   name            = "Drone and Management server"
-  key_pair        = "dragon"
+  key_pair        = "${var.external_access_key_name}"
   security_groups = [
     "${openstack_networking_secgroup_v2.external_access_sec_group.name}"
   ]

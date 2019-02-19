@@ -9,3 +9,16 @@ variable "auth_url" {
 }
 
 variable "token" {} # This variable needs to be "declared" but is stored as an environment variable
+
+variable "subnet_1_CIDR" {
+  description = "The CIDR for subnet 1"
+  default     = "192.168.0.0/24"
+}
+
+variable "external_access_key_name" {
+  default = "dragon"
+}
+
+variable "internal_access_key_name" {
+  default = "pheonix"
+}

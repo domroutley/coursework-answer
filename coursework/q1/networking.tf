@@ -13,7 +13,7 @@ resource "openstack_networking_network_v2" "network_1" {
 resource "openstack_networking_subnet_v2" "subnet_1" {
   name                = "Subnet 1"
   network_id          = "${openstack_networking_network_v2.network_1.id}"
-  cidr                = "192.168.0.0/24"
+  cidr                = "${var.subnet_1_CIDR}"
   ip_version          = "4"
 }
 
