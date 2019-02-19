@@ -4,7 +4,9 @@ resource "openstack_compute_instance_v2" "prod" {
   name            = "Production Webserver"          # The unique name for this instance
   key_pair        = "pheonix"                       # What ssh key pair to use
   security_groups =                                 # What security group/s are associated with instance
-    ["${openstack_networking_secgroup_v2.web_sec_group.name}"]
+    ["${openstack_networking_secgroup_v2.web_sec_group.name}",
+    "${openstack_networking_secgroup_v2.internal_access_sec_group.name}"
+  ]
   network {                                         # Select what network/s to assign instance to
     name = "${openstack_networking_network_v2.webservers_network.name}"
   }
@@ -17,7 +19,7 @@ resource "openstack_compute_instance_v2" "dev" {
   key_pair        = "pheonix"
   security_groups = [
     "${openstack_networking_secgroup_v2.web_sec_group.name}",
-    "${openstack_networking_secgroup_v2.direct_access_sec_group.name}"
+    "${openstack_networking_secgroup_v2.internal_access_sec_group.name}"
   ]
   network {
     name = "${openstack_networking_network_v2.webservers_network.name}"
@@ -32,4 +34,17 @@ resource "openstack_compute_floatingip_associate_v2" "prod_ip_assoc" {
 resource "openstack_compute_floatingip_associate_v2" "dev_ip_assoc" {
   floating_ip = "10.72.96.124"
   instance_id = "${openstack_compute_instance_v2.dev.id}"
+}
+
+resource "openstack_compute_instance_v2" "drone_and_management" {
+  image_name      = "Ubuntu Server 18.04.1"
+  flavor_name     = "m1.tiny"
+  name            = "Drone and Management server"
+  key_pair        = "dragon"
+  security_groups = [
+    "${openstack_networking_secgroup_v2.external_access_sec_group.name}"
+  ]
+  network {
+    name = "${openstack_networking_network_v2.webservers_network.name}"
+  }
 }
