@@ -47,6 +47,10 @@ resource "openstack_compute_instance_v2" "drone_and_management" {
   network {
     name = "${openstack_networking_network_v2.network_1.name}"
   }
+  provisioner "file" {                                                          # Upload this file to the instance
+    source      = "~/.ssh/${var.internal_access_key_name}"                      # Where to get the file from on your local machine
+    destination = "/home/ubuntu/.ssh/${var.internal_access_key_name}"           # Where to place the file on the remote machine
+  }
 }
 
 resource "openstack_compute_floatingip_associate_v2" "manage_ip_assoc" {
