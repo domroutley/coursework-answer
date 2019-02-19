@@ -48,3 +48,8 @@ resource "openstack_compute_instance_v2" "drone_and_management" {
     name = "${openstack_networking_network_v2.network_1.name}"
   }
 }
+
+resource "openstack_compute_floatingip_associate_v2" "manage_ip_assoc" {
+  floating_ip = "${openstack_networking_floatingip_v2.management_floating_ip.address}"
+  instance_id = "${openstack_compute_instance_v2.drone_and_management.id}"
+}

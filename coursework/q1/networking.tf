@@ -21,3 +21,8 @@ resource "openstack_networking_router_interface_v2" "webservers_router_internal_
   router_id           = "${openstack_networking_router_v2.webservers_router.id}"
   subnet_id           = "${openstack_networking_subnet_v2.subnet_1.id}"
 }
+
+resource "openstack_networking_floatingip_v2" "management_floating_ip" {
+  description = "Management server IP"
+  pool        = "cscloud_private_floating"
+}
