@@ -8,7 +8,7 @@ resource "openstack_compute_instance_v2" "prod" {
     "${openstack_networking_secgroup_v2.internal_access_sec_group.name}"
   ]
   network {                                         # Select what network/s to assign instance to
-    name = "${openstack_networking_network_v2.webservers_network.name}"
+    name = "${openstack_networking_network_v2.network_1.name}"
   }
 }
 
@@ -22,7 +22,7 @@ resource "openstack_compute_instance_v2" "dev" {
     "${openstack_networking_secgroup_v2.internal_access_sec_group.name}"
   ]
   network {
-    name = "${openstack_networking_network_v2.webservers_network.name}"
+    name = "${openstack_networking_network_v2.network_1.name}"
   }
 }
 
@@ -45,6 +45,6 @@ resource "openstack_compute_instance_v2" "drone_and_management" {
     "${openstack_networking_secgroup_v2.external_access_sec_group.name}"
   ]
   network {
-    name = "${openstack_networking_network_v2.webservers_network.name}"
+    name = "${openstack_networking_network_v2.network_1.name}"
   }
 }
