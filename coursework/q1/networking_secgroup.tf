@@ -30,7 +30,7 @@ resource "openstack_networking_secgroup_v2" "external_access_sec_group" {
   description = "External access to server security group"
 }
 
-resource "openstack_networking_secgroup_rule_v2" "sec_grp_rule_ssh" {
+resource "openstack_networking_secgroup_rule_v2" "sec_grp_rule_ssh_external" {
   description       = "SSH from everywhere to me"
   direction         = "ingress"
   ethertype         = "IPv4"
@@ -46,7 +46,7 @@ resource "openstack_networking_secgroup_v2" "internal_access_sec_group" {
   description = "internal access to this server security group"
 }
 
-resource "openstack_networking_secgroup_rule_v2" "sec_grp_rule_ssh" {
+resource "openstack_networking_secgroup_rule_v2" "sec_grp_rule_ssh_internal" {
   description       = "SSH from within this subnet to me"
   direction         = "ingress"
   ethertype         = "IPv4"
