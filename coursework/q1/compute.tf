@@ -49,7 +49,7 @@ resource "openstack_compute_instance_v2" "drone" {
   }
 }
 
-resource "openstack_compute_floatingip_associate_v2" "manage_ip_assoc" {
+resource "openstack_compute_floatingip_associate_v2" "drone_ip_assoc" {
   floating_ip = "${openstack_networking_floatingip_v2.drone_floating_ip.address}"
   instance_id = "${openstack_compute_instance_v2.drone.id}"
 }
