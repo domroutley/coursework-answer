@@ -15,10 +15,10 @@ variable "subnet_1_CIDR" {
   default     = "192.168.0.0/24"
 }
 
-variable "external_access_key_name" {
+variable "drone_access_key_name" {
   default = "dragon"
 }
 
-variable "internal_access_key_name" {
+variable "webserver_access_key_name" {
   default = "pheonix"
 }
