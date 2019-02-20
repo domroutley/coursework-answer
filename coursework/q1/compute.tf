@@ -36,10 +36,10 @@ resource "openstack_compute_floatingip_associate_v2" "dev_ip_assoc" {
   instance_id = "${openstack_compute_instance_v2.dev.id}"
 }
 
-resource "openstack_compute_instance_v2" "drone_and_management" {
+resource "openstack_compute_instance_v2" "drone" {
   image_name      = "Ubuntu Server 18.04.1"
   flavor_name     = "m1.tiny"
-  name            = "Drone and Management server"
+  name            = "Drone CI/CD server"
   key_pair        = "${var.external_access_key_name}"
   security_groups = [
     "${openstack_networking_secgroup_v2.access_sec_group.name}"
@@ -50,6 +50,6 @@ resource "openstack_compute_instance_v2" "drone_and_management" {
 }
 
 resource "openstack_compute_floatingip_associate_v2" "manage_ip_assoc" {
-  floating_ip = "${openstack_networking_floatingip_v2.management_floating_ip.address}"
-  instance_id = "${openstack_compute_instance_v2.drone_and_management.id}"
+  floating_ip = "${openstack_networking_floatingip_v2.drone_floating_ip.address}"
+  instance_id = "${openstack_compute_instance_v2.drone.id}"
 }
