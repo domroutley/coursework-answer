@@ -15,6 +15,7 @@ resource "openstack_networking_subnet_v2" "subnet_1" {
   network_id          = "${openstack_networking_network_v2.network_1.id}"
   cidr                = "${var.subnet_1_CIDR}"
   ip_version          = "4"
+  dns_nameservers     = ["10.239.40.2", "10.239.40.130"]
 }
 
 resource "openstack_networking_router_interface_v2" "router_1_internal_interface" { # Connect the router to the subnet
