@@ -1,0 +1,23 @@
+---
+- name: Webserver setup
+  hosts: webservers
+  become: yes
+  remote_user: ubuntu
+
+  tasks:
+
+    - name: Update system package
+      raw: sudo apt update -y
+
+    - name: Install Apache 2
+      apt:
+        name: apache2
+        state: latest
+
+    - name: Upload file
+      copy:
+        src: index.html
+        dest: /var/www/html/file.html
+
+    - name: Start Apache2
+      raw: systemctl start apache2.service
