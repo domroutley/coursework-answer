@@ -20,4 +20,6 @@
         dest: /var/www/html/file.html
 
     - name: Start Apache2
-      raw: systemctl start apache2.service
+      systemd:
+        name: apache2
+        state: started
