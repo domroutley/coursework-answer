@@ -30,6 +30,6 @@ resource "openstack_compute_instance_v2" "dev" {
 }
 
 resource "openstack_compute_floatingip_associate_v2" "dev_ip_assoc" {
-  floating_ip = "10.72.96.124"
+  floating_ip = "${openstack_networking_floatingip_v2.dev_floating_ip.address}"
   instance_id = "${openstack_compute_instance_v2.dev.id}"
 }
