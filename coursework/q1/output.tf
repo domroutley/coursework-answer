@@ -21,15 +21,3 @@ output "dev_sec_groups" {
 output "dev_key" {
   value = "${openstack_compute_instance_v2.dev.key_pair}"
 }
-
-output "drone_ip" {
-  value = "${openstack_networking_floatingip_v2.drone_floating_ip.address}"
-}
-
-output "drone_sec_groups" {
-  value = "${openstack_compute_instance_v2.drone.security_groups}"
-}
-
-output "drone_key" {
-  value = "${openstack_compute_instance_v2.drone.key_pair}"
-}

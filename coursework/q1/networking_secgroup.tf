@@ -25,11 +25,6 @@ resource "openstack_networking_secgroup_rule_v2" "web_sec_grp_rule_http" {
   security_group_id = "${openstack_networking_secgroup_v2.web_sec_group.id}"
 }
 
-resource "openstack_networking_secgroup_v2" "access_sec_group" {
-  name        = "External access sec group"
-  description = "External access to server security group"
-}
-
 resource "openstack_networking_secgroup_rule_v2" "sec_grp_rule_ssh" {
   description       = "SSH from everywhere"
   direction         = "ingress"
@@ -38,5 +33,5 @@ resource "openstack_networking_secgroup_rule_v2" "sec_grp_rule_ssh" {
   port_range_min    = 22
   port_range_max    = 22
   remote_ip_prefix  = "0.0.0.0/0"
-  security_group_id = "${openstack_networking_secgroup_v2.access_sec_group.id}"
+  security_group_id = "${openstack_networking_secgroup_v2.web_sec_group.id}"
 }
