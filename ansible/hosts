@@ -1,6 +1,18 @@
-[webservers]
+---
+[webservers:children]
+production
+development
+
+[production]
 10.72.96.170
-10.72.96.124
+
+[development]
 
 [webservers:vars]
 ansible_python_interpreter=/usr/bin/python3
+
+[production:vars]
+ansible_private_key_file = ~/.ssh/pheonix
+
+[development:vars]
+ansible_private_key_file = ~/.ssh/dragon

@@ -1,4 +1,16 @@
 ---
+- hosts: localhost
+  vars_prompt:
+      - name: "dev_ip"
+        prompt: "Development server IP"
+  tasks:
+
+    - name: Add development server IP to hosts
+      add_host:
+        name: "{{ dev_ip }}"
+        group: development
+
+
 - name: Webserver setup
   hosts: webservers
   become: yes
@@ -6,20 +18,20 @@
 
   tasks:
 
-    - name: Update system package
+    - name: Update system packages
       raw: sudo apt update -y
 
-    - name: Install Apache 2
+    - name: Install Apache2
       apt:
         name: apache2
         state: latest
 
-    - name: Upload file
+    - name: Upload file to location
       copy:
         src: index.html
         dest: /var/www/html/file.html
 
-    - name: Start Apache2
+    - name: Make sure Apache is running
       systemd:
         name: apache2
         state: started
