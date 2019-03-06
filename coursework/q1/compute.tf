@@ -2,7 +2,7 @@ resource "openstack_compute_instance_v2" "prod" {
   image_name      = "Ubuntu Server 18.04.1"                                     # The name of the image that is to be used
   flavor_name     = "m1.micro"                                                  # The flavor of server to use
   name            = "Production Webserver"                                      # The unique name for this instance
-  key_pair        = "${var.prod_access_key_name}"                               # What ssh key pair to use
+  key_pair        = "${openstack_compute_keypair_v2.prod.name}"                      # What ssh key pair to use
   security_groups =                                                             # What security group/s are associated with instance
     ["${openstack_networking_secgroup_v2.web_sec_group.name}"
   ]
@@ -16,11 +16,16 @@ resource "openstack_compute_floatingip_associate_v2" "prod_ip_assoc" {
   instance_id = "${openstack_compute_instance_v2.prod.id}"
 }
 
+resource "openstack_compute_keypair_v2" "prod" {
+  name       = "${var.prod_access_key_name}"
+  public_key = "${var.prod_access_key}"
+}
+
 resource "openstack_compute_instance_v2" "dev" {
   image_name      = "Ubuntu Server 18.04.1"
   flavor_name     = "m1.micro"
   name            = "Development Webserver"
-  key_pair        = "${var.dev_access_key_name}"
+  key_pair        = "${openstack_compute_keypair_v2.dev.name}"
   security_groups = [
     "${openstack_networking_secgroup_v2.web_sec_group.name}"
   ]
@@ -32,4 +37,9 @@ resource "openstack_compute_instance_v2" "dev" {
 resource "openstack_compute_floatingip_associate_v2" "dev_ip_assoc" {
   floating_ip = "${openstack_networking_floatingip_v2.dev_floating_ip.address}"
   instance_id = "${openstack_compute_instance_v2.dev.id}"
+}
+
+resource "openstack_compute_keypair_v2" "dev" {
+  name       = "${var.dev_access_key_name}"
+  public_key = "${var.dev_access_key}"
 }
