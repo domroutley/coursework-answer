@@ -18,7 +18,7 @@ resource "openstack_networking_subnet_v2" "subnet_1" {
   dns_nameservers     = ["10.239.40.2", "10.239.40.130"]
 }
 
-resource "openstack_networking_router_interface_v2" "router_1_internal_interface" { # Connect the router to the subnet
+resource "openstack_networking_router_interface_v2" "router_1_internal_interface" {
   router_id           = "${openstack_networking_router_v2.router_1.id}"
   subnet_id           = "${openstack_networking_subnet_v2.subnet_1.id}"
 }
