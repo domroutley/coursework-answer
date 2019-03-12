@@ -1,8 +1,8 @@
 resource "openstack_compute_instance_v2" "prod" {
-  image_name      = "${var.image}"                                     # The name of the image that is to be used
-  flavor_name     = "${var.flavour}"                                                 # The flavor of server to use
-  name            = "Production Webserver"                                      # The unique name for this instance
-  key_pair        = "${openstack_compute_keypair_v2.prod.name}"                      # What ssh key pair to use
+  image_name      = "${var.image}"                                              # The name of the image that is to be used
+  flavor_name     = "${var.flavour}"                                            # The flavor of server to use
+  name            = "Production"                                                # The unique name for this instance
+  key_pair        = "${openstack_compute_keypair_v2.prod.name}"                 # What ssh key pair to use
   security_groups =                                                             # What security group/s are associated with instance
     ["${openstack_networking_secgroup_v2.web_sec_group.name}"
   ]
@@ -24,7 +24,7 @@ resource "openstack_compute_keypair_v2" "prod" {
 resource "openstack_compute_instance_v2" "dev" {
   image_name      = "${var.image}"
   flavor_name     = "${var.flavour}"
-  name            = "Development Webserver"
+  name            = "Development"
   key_pair        = "${openstack_compute_keypair_v2.dev.name}"
   security_groups = [
     "${openstack_networking_secgroup_v2.web_sec_group.name}"
