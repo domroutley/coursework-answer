@@ -28,7 +28,7 @@
 
     - name: Upload file to location
       copy:
-        src: index.html
+        src: file.html
         dest: /var/www/html/file.html
 
     - name: Make sure Apache is running
